@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getToken } from "../utils/LocalStorage";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api", // Replace with your API base URL
@@ -9,21 +10,21 @@ const axiosInstance = axios.create({
   },
 });
 
-// Optional: Add interceptors for requests or responses
-// axiosInstance.interceptors.request.use(
-//   (config) => {
-//     // You can modify the request config here
-//     // For example, add an authorization token
-//     // const token = localStorage.getItem('token');
-//     // if (token) {
-//     //   config.headers.Authorization = `Bearer ${token}`;
-//     // }
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+axiosInstance.interceptors.request.use(
+  (config) => {
+    // You can modify the request config here
+    // For example, add an authorization token
+
+    const token = getToken();
+    if (token !== null) {
+      config.headers.Authorization = `${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 axiosInstance.interceptors.response.use(
   (response) => {

@@ -1,0 +1,19 @@
+.profile-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h4 {
+    text-align: center;
+  }
+}
+
+.profile-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .logout-btn {
+    float: right;
+  }
+}
