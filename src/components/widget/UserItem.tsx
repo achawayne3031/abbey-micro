@@ -59,7 +59,7 @@ const UserItem: FC<UserItemProps> = ({ onClick, currentUserData, type }) => {
             </>
           ) : (
             <>
-              {type == "following" ? (
+              {type == "followers" ? (
                 <></>
               ) : (
                 <>

@@ -39,15 +39,11 @@ const Dashboard = () => {
       setIsLoading(true);
       const response = await axiosInstance.get("/users/profile");
       setIsLoading(false);
-      ToasterAlert(response.data.message, "success");
       setUserProfileData(response.data.data);
       setFollowersData(response.data.data.followers);
       setFollowingData(response.data.data.following);
       setFriendData(response.data.data.friends);
       setPeerData(response.data.data.peer);
-
-      console.log(response.data.data.following, "following......");
-      console.log(response.data.data.followers, "follower......");
     } catch (error: any) {
       setIsLoading(false);
       ToasterAlert(error.response.data.message, "error");
@@ -198,7 +194,9 @@ const Dashboard = () => {
                     return (
                       <UserItem
                         type="following"
-                        onClick={() => {}}
+                        onClick={(e, type) => {
+                          handleRemoveUserClick(e, "unfollow");
+                        }}
                         currentUserData={userItem.user}
                       />
                     );
@@ -214,9 +212,7 @@ const Dashboard = () => {
                     return (
                       <UserItem
                         type="followers"
-                        onClick={(e, type) => {
-                          handleRemoveUserClick(e, "unfollow");
-                        }}
+                        onClick={(e, type) => {}}
                         currentUserData={userItem.user}
                       />
                     );
